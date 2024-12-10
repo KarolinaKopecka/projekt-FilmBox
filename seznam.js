@@ -103,4 +103,50 @@ const filmy = [
 			'Na zámek v podhůří Krkonoš přijíždí jeho nový majitel Štěpán se svojí snoubenkou, krásnou komtesou Blankou, a mladším bratrem Adamem. Cestou kočár nešťastně srazí kolemjdoucí dívku, Adam jí pomůže a ona se do něj zamiluje. Na zámku Adam objeví starou vlašskou knihu, která by měla obsahovat cestu k pokladům. Tajemné značky vlašské knihy však nedokáže vyluštit ani národopisec Jiráček, který v kraji sbírá pověsti a nevychází z údivu nad tím, že zdejší lidé stále věří v Krakonoše. Na zámku se objeví záhadný cizinec a nabídne Štěpánovi, že jej k pokladu za určitých podmínek dovede. Výprava do hor může začít. Naplní se Liduščina láska k Adamovi? Jakou záhadu skrývá starý obraz na zámku Hůrka a co strašlivého se v horách kdysi odehrálo? A kdo je vlastně Krakonoš a jaké je jeho největší tajemství? (csfd.cz, Česká televize)',
 		premiera: '2022-12-24',
 	},
+	{
+		id: 'zelena-mile',
+		nazev: 'Zelená míle',
+		plakat: {
+			url: 'https://image.pmgstatic.com/cache/resized/w1526/files/images/film/posters/000/073/73224_ac1b7n.jpg',
+			sirka: 420,
+			vyska: 592,
+		},
+		ochutnavka: 'Zelená míle je příběh vězně s nadpřirozenými schopnostmi, který mění životy na smrtelné chodbě.',
+		popis:
+			'John Coffey je obrovský, ale nevinný vězeň, odsouzený k trestu smrti za brutální vraždu dvou dívek. Na smrtelné chodbě věznice Eblock se ukáže, že má nadpřirozené schopnosti, včetně schopnosti léčit a vnímat lidskou bolest. Strážci na jeho oddělení, včetně Paula Edgecombea, si postupně uvědomují, že Coffey je jiný než ostatní vězni. I přes jeho zázračné schopnosti se však musí postavit otázce spravedlnosti a vinny. Příběh se zaměřuje na morální dilemata, zázraky a sílu odpuštění.',
+		premiera: '2022-12-24',
+	},
 ]
+
+const seznam = document.querySelector('#seznam-filmu');
+seznam.innerHTML = '';
+
+filmy.forEach(function(film) {
+
+	const filmDiv = document.createElement('div');
+	filmDiv.classList.add('film');
+	
+	const filmHTML = `
+	<div class="col">
+  <div class="card">
+    <img
+      src="${film.plakat.url}" alt="Plakát
+      width="780px"
+      height="520px"
+      class="card-img-top"
+      alt="plakát k filmu ${film.nazev}"
+    />
+    <div class="card-body">
+      <h5 class="card-title">${film.nazev}</h5>
+      <p class="card-text">${film.ochutnavka}</p>
+      <a href="film.html#${film.id}" class="btn btn-primary">Přehrát</a>  
+    </div>
+  </div>
+</div>
+	 
+	`;
+	filmDiv.innerHTML = filmHTML;
+	seznam.appendChild(filmDiv);
+  });
+
+

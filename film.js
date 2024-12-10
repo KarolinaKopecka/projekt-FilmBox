@@ -104,3 +104,95 @@ const filmy = [
 		premiera: '2022-12-24',
 	},
 ]
+//Upravení specifický stránky filmy o údaje
+const filmId = window.location.hash.slice(1);
+const film = filmy.find(f => f.id === filmId);
+console.log(film)
+
+ if (film) {
+	
+	const filmDetail = document.getElementById('detail-filmu');
+	const filmTitle = filmDetail.querySelector('.card-title');
+	filmTitle.textContent = film.nazev;
+
+	const filmDescription = filmDetail.querySelector('.card-text');
+	filmDescription.textContent = film.popis;
+
+	const premiereText = filmDetail.querySelector('#premiera');
+	
+	const filmPoster = filmDetail.querySelector('.img-fluid');
+	filmPoster.src = film.plakat.url;
+	filmPoster.alt = `Plakát k filmu ${film.nazev}`;
+	filmPoster.width = film.plakat.sirka;
+	filmPoster.height = film.plakat.vyska;
+  
+} else {
+	console.error("Film nenalezen");
+	const detailFilm = document.querySelector('#detail-filmu');
+	detailFilm.innerHTML = "<p>Film nebyl nalezen.</p>";
+  }
+
+/*/psaní poznámek (1,2)
+const note = document.querySelector('#note-form')
+  note.addEventListener('submit', function(event) {
+	event.preventDefault();
+	console.log('Formulář byl odeslán, ale stránka se neobnoví.'); //kontrola 
+  });*/
+
+  document.addEventListener("DOMContentLoaded", function() {
+	const noteForm = document.querySelector("#note-form");
+	const messageInput = document.querySelector("#message-input");
+	const termsCheckbox = document.querySelector("#terms-checkbox");
+  
+	noteForm.addEventListener("submit", function(event) {
+	  event.preventDefault();
+	  messageInput.classList.remove("is-invalid");
+	  messageInput.focus();
+	  termsCheckbox.classList.remove("is-invalid");
+	  termsCheckbox.focus();
+	
+	  //kontrola postupně: text? checkbox? 
+	  if (messageInput.value.trim() === "") {  //když to bude prázdný odeslaný
+		messageInput.classList.add("is-invalid"); 
+	  } else {
+		if (!termsCheckbox.checked) {      //zaškrtnuto --> hodnota false 
+		  termsCheckbox.classList.add("is-invalid"); 
+		} else {    //oboje ok i text i checkbox, pak přepsat 
+		  const noteParagraph = document.createElement("p");
+		  noteParagraph.classList.add("card-text");
+		  noteParagraph.textContent = messageInput.value.trim();
+		  noteForm.innerHTML = '';
+		  noteForm.appendChild(noteParagraph); 
+		}
+	  }
+	});
+  });
+  
+
+  //HODNOCENí(7)
+//pomocná funkce
+  const fullStars = (numberOfStars) => {
+	const stars = document.querySelectorAll('.fa-star');
+	stars.forEach ((star, index) => {
+	if (index < numberOfStars) {
+		star.classList.remove ('far');
+		star.classList.add('fas')
+	} else {
+		star.classList.remove('fas')
+		star.classList.add('far')
+	}
+	})
+  }
+//hvezdičky
+  const stars = document.querySelectorAll('.fa-star')
+  stars.forEach((star) => {
+	star.addEventListener ('click', () => {
+		const score = parseInt (star.textContent);
+		fullStars (score)
+	})
+	star.addEventListener('mouseenter', ()=> {
+		const score = parseInt (star.textContent);
+		fullStars (score)
+	})
+  }
+)
